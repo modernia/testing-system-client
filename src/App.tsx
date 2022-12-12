@@ -9,10 +9,14 @@ import Home from './pages/home'
 import UserDashboard from './pages/user/user-dashboard'
 
 import { getUserRol, isLoggedIn } from './services/auth'
+import Welcome from "./pages/admin/welcome";
+import Profile from "./pages/profile";
+import ViewCategories from "./pages/admin/category/view-categories";
+import AddCategory from "./pages/admin/category/add-category";
 
 function App() {
   const [isLogged, setIsLogged] = useState(false)
-  const [isAdmin, setIsAdmin] = useState(true)
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(true)
 
   useEffect(() => {
     setIsLogged(isLoggedIn())
@@ -34,10 +38,16 @@ function App() {
         } />
         <Route path='/admin' element={
             isAdmin ? <Admin /> : <Navigate to={'/user-dashboard'} />
-        } />
+        }>
+          <Route path='/admin/' element={<Welcome />} />
+          <Route path='/admin/profile' element={<Profile />} />
+          <Route path='/admin/categories' element={<ViewCategories />} />
+          <Route path='/admin/add-category' element={<AddCategory />} />
+        </Route>
         <Route path='/user-dashboard' element={
           isLogged ? <UserDashboard /> : <Navigate to={'/login'} />
         } />
+
         <Route path='/signup' element={!isLogged ? <Signup /> : <Navigate to={'/'} />} />
         <Route path='/login' element={!isLogged ? <Login /> : <Navigate to={'/'} />} />
       </Routes>
