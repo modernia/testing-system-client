@@ -36,14 +36,12 @@ export const getCurrentUser = (token: string) => {
 }
 
 
-
-
 export const loginAuth = (token: string) => {
   localStorage.setItem('token', token)
 }
 
 export const isLoggedIn = () => {
-  return localStorage.getItem('token') ? true : false
+  return !!localStorage.getItem('token')
 }
 
 export const logout = () => {
