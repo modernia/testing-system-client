@@ -1,10 +1,10 @@
-import Navbar from '../../components/atoms/navbar'
+
 import LoginIcon from '../../assets/login.png'
 
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
-import { Auth, User } from '../../models/user';
+import { Auth } from '../../models/user';
 import Swal from 'sweetalert2';
 import { generateToken, getCurrentUser, loginAuth, logout, setUser } from '../../services/auth';
 
@@ -34,7 +34,7 @@ function Login() {
           loginAuth(res.token)
           const user = await getCurrentUser(res.token);
           setUser(user)
-          if (user.authorities[0].authority == 'ADMIN') navigate('/admin')
+          if (user.authorities[0].authority == 'ADMIN') navigate('/admin', {replace: true})
           else if (user.authorities[0].authority == 'NORMAL') navigate('/user-dashboard')
           else { logout(); navigate('/login') }
 
@@ -44,7 +44,7 @@ function Login() {
             icon: 'success',
           }) */
         } else {
-          Swal.fire({
+          await Swal.fire({
             title: 'Bad credentials',
             text: 'type your credentials again',
             icon: 'error'

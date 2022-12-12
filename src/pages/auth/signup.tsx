@@ -13,7 +13,7 @@ function Signup() {
   let schema = yup.object().shape({
     username: yup.string().required(),
     name: yup.string().required(),
-    lastname: yup.string().required(),
+    lastName: yup.string().required(),
     email: yup.string().email(),
     password: yup.string().required(),
     phone: yup.string().required(),
@@ -24,7 +24,7 @@ function Signup() {
     initialValues: {
       username: '',
       name: '',
-      lastname: '',
+      lastName: '',
       email: '',
       password: '',
       phone: '',
@@ -89,13 +89,13 @@ function Signup() {
             <div className='mb-5'>
               <input
                 type="text"
-                name='lastname'
+                name='lastName'
                 className='w-full px-2 py-1 text-gray-900 border rounded-md border-blue-900 bg-transparent outline-none' placeholder='Lastname'
                 onChange={formik.handleChange}
-                value={formik.values.lastname}
+                value={formik.values.lastName}
               />
-              {formik.errors.lastname ? (
-                <div className='text-red-600 text-sm '>{formik.errors.lastname}</div>
+              {formik.errors.lastName ? (
+                <div className='text-red-600 text-sm '>{formik.errors.lastName}</div>
               ) : null}
             </div>
             <div className='mb-5'>
