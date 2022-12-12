@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { getUser, isLoggedIn, logout } from "../../services/auth"
+import {User} from "../../models/user";
 
 function Navbar() {
   const navigate = useNavigate()
   const [isLogged, setIsLogged] = useState(false)
-  const [user, setUser] = useState()
+  const [user, setUser] = useState<User | null>()
 
   useEffect(() => {
     setIsLogged(isLoggedIn())
@@ -13,7 +14,6 @@ function Navbar() {
     if (isLogged) {
       setUser(getUser())
     }
-
 
   }, [isLogged])
 
@@ -36,7 +36,11 @@ function Navbar() {
             <Link to='/signup'>Signup</Link>
           </>)
           : (<>
-            <button className="font-medium">{user?.username}</button>
+            <button className="font-medium">
+              <Link to={'/admin/profile'}>
+                {user?.username}
+              </Link>
+            </button>
             <button onClick={handleLogout} >Log out</button>
           </>)
         }
