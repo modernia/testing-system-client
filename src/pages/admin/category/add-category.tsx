@@ -5,7 +5,7 @@ import {createCategory} from "../../../services/category.service";
 import Swal from "sweetalert2";
 
 export default function AddCategory () {
-    
+
     let schema = yup.object().shape({
       title: yup.string().required(),
       description: yup.string(),
@@ -22,16 +22,14 @@ export default function AddCategory () {
           const result = await createCategory(values);
           if(result != null){
               await Swal.fire({
-                title: 'User created',
-                text: 'Redirect to dashboard',
+                title: 'Category created',
+                text: 'Redirect to categories list',
                 icon: 'success',
               })
           }
-          
       },
-
     });
-    
+
     return (
       <div className="bg-white shadow-md p-5 w-4/5 rounded-md">
         <h3 className="text-2xl text-gray-800 font-medium">Add Category</h3>
@@ -58,10 +56,10 @@ export default function AddCategory () {
                 className='w-full px-2 py-1 text-gray-900 border rounded-md border-blue-900 bg-transparent outline-none h-30'
                 ></textarea>
             </div>
-  
-  
+
+
           </div>
-          
+
           <div className='flex flex-col items-center'>
             <button
               type='submit'
@@ -71,7 +69,7 @@ export default function AddCategory () {
           </div>
         </form>
 
-        
+
       </div>
     )
 }
